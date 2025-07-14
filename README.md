@@ -45,13 +45,13 @@ An IoT-enabled automatic medicine dispenser that reminds users to take medicine 
 ## 📸 Project Prototype Images
 
 ### 🧩 Power Supply
-[![Power Supply](power supply.jpg)](power supply.jpg)
+[![Power Supply](power_supply.jpg)](power_supply.jpg)
 
 ### 🔌 Circuit Setup (Connecting to Wi-Fi)
 [![Circuit Setup](connecting_to_wifi.jpg)](connecting_to_wifi.jpg)
 
 ### 📦 Box Opening with Buzzer Ringing
-[![Box Opening](box opening and buzzer rings.jpg)](box opening and buzzer rings.jpg)
+[![Box Opening](box_opening_and_buzzer_rings.jpg)](box_opening_and_buzzer_rings.jpg)
 
 ---
 
