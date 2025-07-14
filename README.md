@@ -36,6 +36,14 @@ An IoT-enabled automatic medicine dispenser that reminds users to take medicine 
 
 ---
 
+## 📱 Mobile Wi-Fi Controller App
+
+[![Wi-Fi Controller](wifi_controller.jpg)](wifi_controller.jpg)
+
+> This shows the interface of the mobile app used to connect to the smart medicine box via Wi-Fi.
+
+---
+
 ## 🖼️ Circuit Diagram
 
 [![Circuit Diagram](circuit_diagram.jpg)](circuit_diagram.jpg)
