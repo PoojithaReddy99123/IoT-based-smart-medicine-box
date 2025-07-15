@@ -1,46 +1,38 @@
 # 💊 IoT Smart Medicine Box
 
-An IoT-enabled automatic medicine dispenser that reminds users to take medicine on time and notifies them if they miss a dose.
+An Arduino-based automatic medicine dispenser that alerts users to take medicine on time using a buzzer and motorized box. It uses an IR sensor to detect if medicine is picked and connects to a **mobile Wi-Fi controller app** for remote monitoring and control.
 
 ---
 
 ## 🧰 Components Used
 
-- NodeMCU (ESP8266)
-- Servo Motor
-- IR Sensor
-- Buzzer
-- Jumper Wires
-- Breadboard
-- Medicine Box Casing
-- IFTTT Webhooks
+- Arduino UNO  
+- RTC Module (Real Time Clock)  
+- IR Sensor  
+- LCD Display (16x2)  
+- Buzzer  
+- Motor (for CD tray mechanism)  
+- Wi-Fi Controller App (for user interface)  
+- Jumper Wires & PCB  
+- Power Supply  
 
 ---
 
 ## 🔧 Working Principle
 
-1. At the set time, a buzzer alerts the user.
-2. The medicine box opens using a servo motor.
-3. An IR sensor checks if the user picks the medicine.
-4. If the medicine is **not taken within 10 seconds**, a mobile notification is sent using **IFTTT**.
-5. The box then automatically closes.
-
----
-
-## 🌐 Notification Setup (IFTTT)
-
-- Create a free IFTTT account.
-- Create an event named: `missed_medicine`
-- Use **Webhooks** as trigger and **Notifications** as the action.
-- Paste your IFTTT Webhook key into the `main.ino` Arduino code.
+1. The RTC module tracks the time.  
+2. At a preset time, a buzzer rings to alert the user.  
+3. The medicine box (CD tray) opens automatically via motor.  
+4. An IR sensor checks if the user picks up the medicine.  
+5. If the medicine is **not taken**, it logs the miss and can show notification via the Wi-Fi controller app.  
+6. The box closes after a few seconds.  
 
 ---
 
 ## 📱 Mobile Wi-Fi Controller App
 
-[![Wi-Fi Controller](wifi_controller.jpg)](wifi_controller.jpg)
-
-> This shows the interface of the mobile app used to connect to the smart medicine box via Wi-Fi.
+[![Wi-Fi Controller](wifi_controller.jpg)](wifi_controller.jpg)  
+*Interface of the mobile app used to control or monitor the smart medicine box wirelessly.*
 
 ---
 
@@ -52,24 +44,36 @@ An IoT-enabled automatic medicine dispenser that reminds users to take medicine 
 
 ## 📸 Project Prototype Images
 
-### 🧩 Power Supply
+### 🧩 Power Supply  
 [![Power Supply](power_supply.jpg)](power_supply.jpg)
 
-### 🔌 Circuit Setup (Connecting to Wi-Fi)
+### 🔌 Circuit Setup (Connecting to Controller)  
 [![Circuit Setup](connecting_to_wifi.jpg)](connecting_to_wifi.jpg)
 
-### 📦 Box Opening with Buzzer Ringing
+### 📦 Box Opening with Buzzer Ringing  
 [![Box Opening](box_opening_and_buzzer_rings.jpg)](box_opening_and_buzzer_rings.jpg)
 
 ---
 
 ## 🚀 How to Run the Project
 
-1. Connect all components as shown in the circuit diagram.
-2. Flash the `main.ino` code to your NodeMCU using Arduino IDE.
-3. Update your Wi-Fi and IFTTT webhook info in the code.
-4. Power the device.
-5. At set times, test the alert and notification system by skipping or taking the medicine.
+1. Assemble the circuit as per the diagram.  
+2. Flash the provided Arduino code (`main.ino`) using **Arduino IDE**.  
+3. Set alarm times inside the code.  
+4. Install and connect the mobile Wi-Fi controller app to your Arduino setup.  
+5. Power the system and test real-time alerts, IR detection, and tray control.
+
+---
+
+## 📂 Project Structure
+IoT-based-smart-medicine-box/
+├── main.ino
+├── circuit_diagram.jpg
+├── wifi_controller.jpg
+├── power_supply.jpg
+├── connecting_to_wifi.jpg
+├── box_opening_and_buzzer_rings.jpg
+└── README.md
 
 ---
 
@@ -80,4 +84,4 @@ GitHub: [@PoojithaReddy99123](https://github.com/PoojithaReddy99123)
 
 ---
 
-> 🚑 Designed to assist elderly and forgetful patients in taking medicines on time. Built using IoT for real-world healthcare impact.
+> 🚑 Designed to support elderly and busy users in taking medicine on time through IoT automation and real-time feedback.
