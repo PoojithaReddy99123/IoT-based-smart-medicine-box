@@ -34,11 +34,12 @@ An offline Arduino UNO-based automatic medicine dispenser that helps users—esp
 ### 🔌 Circuit Diagram  
 ![Circuit Diagram](circuit_diagram.jpg)
 
+### 🔋 Power Supply Setup  
+![Power Supply](power_supply.jpg)
+
 ### 📦 Box Opening During Alert  
 ![Box Opening](box_opening_and_buzzer_rings.jpg)
 
-### 🔋 Power Supply Setup  
-![Power Supply](power_supply.jpg)
 
 ---
 
