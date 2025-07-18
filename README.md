@@ -1,87 +1,104 @@
-# 💊 IoT Smart Medicine Box
+💊 IoT-Based Smart Medicine Box
 
-An Arduino-based automatic medicine dispenser that alerts users to take medicine on time using a buzzer and motorized box. It uses an IR sensor to detect if medicine is picked and connects to a **mobile Wi-Fi controller app** for remote monitoring and control.
-
----
-
-## 🧰 Components Used
-
-- Arduino UNO  
-- RTC Module (Real Time Clock)  
-- IR Sensor  
-- LCD Display (16x2)  
-- Buzzer  
-- Motor (for CD tray mechanism)  
-- Wi-Fi Controller App (for user interface)  
-- Jumper Wires & PCB  
-- Power Supply  
+An offline Arduino UNO-based automatic medicine dispenser that helps users—especially the elderly—take medicines on time. It rings a buzzer and opens a motorized box at a scheduled time using an RTC. An IR sensor detects whether the medicine was picked. This project is simple, effective, and fully operational without internet connectivity.
 
 ---
 
-## 🔧 Working Principle
+🧰 Components Used
 
-1. The RTC module tracks the time.  
-2. At a preset time, a buzzer rings to alert the user.  
-3. The medicine box (CD tray) opens automatically via motor.  
-4. An IR sensor checks if the user picks up the medicine.  
-5. If the medicine is **not taken**, it logs the miss and can show notification via the Wi-Fi controller app.  
-6. The box closes after a few seconds.  
+Arduino UNO
 
----
+RTC Module (DS3231)
 
-## 📱 Mobile Wi-Fi Controller App
+IR Sensor
 
-[![Wi-Fi Controller](wifi_controller.jpg)](wifi_controller.jpg)  
-*Interface of the mobile app used to control or monitor the smart medicine box wirelessly.*
+16x2 LCD Display (optional, for time/status display)
 
----
+Buzzer
 
-## 🖼️ Circuit Diagram
+L293D Motor Driver IC
 
-[![Circuit Diagram](circuit_diagram.jpg)](circuit_diagram.jpg)
+DC Motor (e.g., modified CD tray)
 
----
+Jumper Wires
 
-## 📸 Project Prototype Images
+Power Supply (e.g., 9V/12V adapter)
 
-### 🧩 Power Supply  
-[![Power Supply](power_supply.jpg)](power_supply.jpg)
+Custom PCB (optional, for neat setup)
 
-### 🔌 Circuit Setup (Connecting to Controller)  
-[![Circuit Setup](connecting_to_wifi.jpg)](connecting_to_wifi.jpg)
-
-### 📦 Box Opening with Buzzer Ringing  
-[![Box Opening](box_opening_and_buzzer_rings.jpg)](box_opening_and_buzzer_rings.jpg)
 
 ---
 
-## 🚀 How to Run the Project
+🔧 Working Principle
 
-1. Assemble the circuit as per the diagram.  
-2. Flash the provided Arduino code (`main.ino`) using **Arduino IDE**.  
-3. Set alarm times inside the code.  
-4. Install and connect the mobile Wi-Fi controller app to your Arduino setup.  
-5. Power the system and test real-time alerts, IR detection, and tray control.
+1. The RTC module keeps track of real time.
+
+2. At the preset medicine time, the buzzer rings.
+
+3. The medicine box opens using a motor driven by the L293D driver IC.
+
+4. The IR sensor detects whether the user picks up the medicine.
+
+5. If the medicine is not picked within a set time (e.g., 10 seconds), the tray still closes.
+
+6. The process can repeat daily by setting the time inside the Arduino code.
+
 
 ---
 
-## 📂 Project Structure
+🖼️ Prototype & Circuit Diagram
+
+Circuit Diagram: circuit_diagram.jpg
+
+Working Prototype:
+
+box_opening_and_buzzer_rings.jpg
+
+power_supply.jpg
+
+
+These images show the complete connection between Arduino UNO, RTC, IR sensor, buzzer, L293D, and the motor mechanism (CD tray or custom box).
+
+---
+
+🚀 How to Use
+
+1. Connect the components as per the provided circuit diagram.
+
+2. Install the required libraries in the Arduino IDE:
+
+RTClib by Adafruit (for RTC module)
+
+3. Upload the code to the Arduino UNO.
+
+4. Set the correct medicine reminder time in the code (default: 9:00 AM).
+
+5. Power the system using USB or adapter.
+
+6. At the set time, the buzzer will ring and the box will open.
+
+7. The IR sensor will check if medicine is picked.
+
+8. The box will close automatically after a few seconds.
+
+
+
+
+---
+
+📂 Folder Structure
+
 IoT-based-smart-medicine-box/
 ├── main.ino
 ├── circuit_diagram.jpg
-├── wifi_controller.jpg
 ├── power_supply.jpg
-├── connecting_to_wifi.jpg
 ├── box_opening_and_buzzer_rings.jpg
 └── README.md
 
----
-
-## 👩‍💻 Author
-
-**Poojitha Reddy**  
-GitHub: [@PoojithaReddy99123](https://github.com/PoojithaReddy99123)
 
 ---
 
-> 🚑 Designed to support elderly and busy users in taking medicine on time through IoT automation and real-time feedback.
+👩‍💻 Author
+
+Poojitha Reddy
+GitHub: @PoojithaReddy99123
