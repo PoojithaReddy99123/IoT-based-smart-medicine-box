@@ -1,55 +1,59 @@
-# 💊 IoT-Based Smart Medicine Box (Arduino UNO)
+# 💊 IoT Smart Medicine Box
 
-An offline Arduino UNO-based automatic medicine dispenser that helps users—especially the elderly—take medicines on time. It rings a buzzer and opens a motorized box at a scheduled time using an RTC. An IR sensor detects whether the medicine was picked. This project is simple, effective, and fully operational without internet connectivity.
+An Arduino-based automatic medicine dispenser that alerts users to take medicine on time using a buzzer and motorized box. It uses an IR sensor to detect if medicine is picked. Designed especially to help elderly or busy individuals maintain their medicine schedule with minimal human intervention.
+
 ---
 
 ## 🧰 Components Used
 
 - Arduino UNO  
-- RTC Module (DS3231)  
+- RTC Module (Real Time Clock - DS3231)  
 - IR Sensor  
-- 16x2 LCD (optional)  
+- LCD Display (16x2) (Optional)  
 - Buzzer  
-- L293D Motor Driver IC  
-- DC Motor (e.g., CD tray mechanism)  
-- Jumper Wires  
-- Power Supply or 9V Adapter  
-- Custom PCB (for compact setup)
+- DC Motor (for CD tray mechanism)  
+- Jumper Wires & Custom PCB  
+- Power Supply  
 
 ---
 
 ## 🔧 Working Principle
 
-1. **RTC** keeps track of real time.
-2. At preset time (e.g., 9:00 AM), **buzzer rings**.
-3. The **motorized tray opens** using L293D.
-4. **IR sensor checks** if medicine is picked up.
-5. Tray closes after a few seconds, whether picked or not.
-6. Entire system is **offline** and works autonomously.
+- The RTC module tracks the real time.
+- At the preset time, a buzzer rings to alert the user.
+- The medicine box (CD tray) opens automatically using a motor.
+- An IR sensor detects if the medicine is picked.
+- If not picked, it can log the event or alert via display (if LCD is used).
+- The tray closes after a few seconds automatically.
+- Works entirely offline, using real-time components.
 
 ---
 
-## 🖼️ Images
-
-### 🔌 Circuit Diagram  
+## 🖼️ Circuit Diagram  
 ![Circuit Diagram](circuit_diagram.jpg)
 
-### 🔋 Power Supply Setup  
+---
+
+## 📸 Project Prototype Images
+
+### 🧩 Power Supply  
 ![Power Supply](power_supply.jpg)
 
-### 📦 Box Opening During Alert  
-![Box Opening](box_opening_and_buzzer_rings.jpg)
+### 🔌 Circuit Setup (Connecting to Controller)  
+![Circuit Setup](connecting_to_wifi.jpg)
 
+### 📦 Box Opening with Buzzer Ringing  
+![Box Opening](box_opening_and_buzzer_rings.jpg)
 
 ---
 
-## 🚀 How to Use
+## 🚀 How to Run the Project
 
-1. Wire the circuit as shown above.
-2. Install **RTClib** in Arduino IDE (via Library Manager).
-3. Upload `main.ino` to Arduino UNO.
-4. Set medicine alert time in the code (default: 9:00 AM).
-5. Power the circuit; system works automatically.
+1. Assemble the circuit as per the diagram.
+2. Install **RTClib** in Arduino IDE via Library Manager.
+3. Upload the `main.ino` Arduino sketch to the Arduino UNO board.
+4. Edit the code to set your custom alarm times (if needed).
+5. Power on the circuit and test real-time alerts, IR detection, and motor operation.
 
 ---
 
@@ -70,15 +74,7 @@ GitHub: [@PoojithaReddy99123](https://github.com/PoojithaReddy99123)
 
 ---
 
-## 🔧 Optional Improvements
+## 🚑 About the Project
 
-- Add LCD to show time/status
-- Add EEPROM for logging
-- Add buttons to manually override tray
-- Upgrade to NodeMCU for internet-based alerts
-
+🚑 Designed to support elderly and busy users in taking medicine on time through IoT automation and real-time feedback.  
 ---
-
-## 📄 License
-
-Open source for educational use. Credit appreciated.
