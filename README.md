@@ -1,93 +1,58 @@
-💊 IoT-Based Smart Medicine Box
+# 💊 IoT-Based Smart Medicine Box (Arduino UNO)
 
 An offline Arduino UNO-based automatic medicine dispenser that helps users—especially the elderly—take medicines on time. It rings a buzzer and opens a motorized box at a scheduled time using an RTC. An IR sensor detects whether the medicine was picked. This project is simple, effective, and fully operational without internet connectivity.
+---
+
+## 🧰 Components Used
+
+- Arduino UNO  
+- RTC Module (DS3231)  
+- IR Sensor  
+- 16x2 LCD (optional)  
+- Buzzer  
+- L293D Motor Driver IC  
+- DC Motor (e.g., CD tray mechanism)  
+- Jumper Wires  
+- Power Supply or 9V Adapter  
+- Custom PCB (for compact setup)
 
 ---
 
-🧰 Components Used
+## 🔧 Working Principle
 
-Arduino UNO
-
-RTC Module (DS3231)
-
-IR Sensor
-
-16x2 LCD Display (optional, for time/status display)
-
-Buzzer
-
-L293D Motor Driver IC
-
-DC Motor (e.g., modified CD tray)
-
-Jumper Wires
-
-Power Supply (e.g., 9V/12V adapter)
-
-Custom PCB (optional, for neat setup)
-
+1. **RTC** keeps track of real time.
+2. At preset time (e.g., 9:00 AM), **buzzer rings**.
+3. The **motorized tray opens** using L293D.
+4. **IR sensor checks** if medicine is picked up.
+5. Tray closes after a few seconds, whether picked or not.
+6. Entire system is **offline** and works autonomously.
 
 ---
 
-🔧 Working Principle
+## 🖼️ Images
 
-1. The RTC module keeps track of real time.
+### 🔌 Circuit Diagram  
+![Circuit Diagram](circuit_diagram.jpg)
 
-2. At the preset medicine time, the buzzer rings.
+### 📦 Box Opening During Alert  
+![Box Opening](box_opening_and_buzzer_rings.jpg)
 
-3. The medicine box opens using a motor driven by the L293D driver IC.
-
-4. The IR sensor detects whether the user picks up the medicine.
-
-5. If the medicine is not picked within a set time (e.g., 10 seconds), the tray still closes.
-
-6. The process can repeat daily by setting the time inside the Arduino code.
-
+### 🔋 Power Supply Setup  
+![Power Supply](power_supply.jpg)
 
 ---
 
-🖼️ Prototype & Circuit Diagram
+## 🚀 How to Use
 
-Circuit Diagram: circuit_diagram.jpg
-
-Working Prototype:
-
-box_opening_and_buzzer_rings.jpg
-
-power_supply.jpg
-
-
-These images show the complete connection between Arduino UNO, RTC, IR sensor, buzzer, L293D, and the motor mechanism (CD tray or custom box).
+1. Wire the circuit as shown above.
+2. Install **RTClib** in Arduino IDE (via Library Manager).
+3. Upload `main.ino` to Arduino UNO.
+4. Set medicine alert time in the code (default: 9:00 AM).
+5. Power the circuit; system works automatically.
 
 ---
 
-🚀 How to Use
-
-1. Connect the components as per the provided circuit diagram.
-
-2. Install the required libraries in the Arduino IDE:
-
-RTClib by Adafruit (for RTC module)
-
-3. Upload the code to the Arduino UNO.
-
-4. Set the correct medicine reminder time in the code (default: 9:00 AM).
-
-5. Power the system using USB or adapter.
-
-6. At the set time, the buzzer will ring and the box will open.
-
-7. The IR sensor will check if medicine is picked.
-
-8. The box will close automatically after a few seconds.
-
-
-
-
----
-
-📂 Folder Structure
-
+## 📂 Project Structure
 IoT-based-smart-medicine-box/
 ├── main.ino
 ├── circuit_diagram.jpg
@@ -95,10 +60,24 @@ IoT-based-smart-medicine-box/
 ├── box_opening_and_buzzer_rings.jpg
 └── README.md
 
+---
+
+## 👩‍💻 Author
+
+**Poojitha Reddy**  
+GitHub: [@PoojithaReddy99123](https://github.com/PoojithaReddy99123)
 
 ---
 
-👩‍💻 Author
+## 🔧 Optional Improvements
 
-Poojitha Reddy
-GitHub: @PoojithaReddy99123
+- Add LCD to show time/status
+- Add EEPROM for logging
+- Add buttons to manually override tray
+- Upgrade to NodeMCU for internet-based alerts
+
+---
+
+## 📄 License
+
+Open source for educational use. Credit appreciated.
