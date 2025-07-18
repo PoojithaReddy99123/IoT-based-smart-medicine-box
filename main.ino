@@ -1,103 +1,90 @@
-#include <Servo.h>
-#include <ESP8266WiFi.h>
-#include <WiFiClientSecure.h>
+#include <Wire.h>
+#include "RTClib.h"
 
-// Replace with your WiFi credentials
-const char* ssid = "YOUR_WIFI_NAME";
-const char* password = "YOUR_WIFI_PASSWORD";
+const int buzzerPin = 8;
+const int irSensorPin = 9;
+const int motorPin1 = 6; // for L293D IN1
+const int motorPin2 = 7; // for L293D IN2
 
-// IFTTT Webhook details
-const char* host = "maker.ifttt.com";
-const int httpsPort = 443;
-const char* trigger = "missed_medicine"; // Your IFTTT event name
-const char* key = "YOUR_IFTTT_KEY";      // Your IFTTT webhook key
-
-Servo medicineServo;
-const int buzzerPin = D1;
-const int irSensorPin = D2;
-const int servoPin = D3;
+RTC_DS3231 rtc;
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(9600);
   pinMode(buzzerPin, OUTPUT);
   pinMode(irSensorPin, INPUT);
-  medicineServo.attach(servoPin);
+  pinMode(motorPin1, OUTPUT);
+  pinMode(motorPin2, OUTPUT);
 
-  // Connect to WiFi
-  WiFi.begin(ssid, password);
-  Serial.print("Connecting to WiFi");
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
+  if (!rtc.begin()) {
+    Serial.println("Couldn't find RTC");
+    while (1);
   }
-  Serial.println("Connected!");
 
-  delay(2000); // wait before first alert
-  alertUser();
+  // rtc.adjust(DateTime(F(__DATE__), F(__TIME__))); // Uncomment once to set RTC time
 }
 
 void loop() {
-  // Nothing to do in loop
+  DateTime now = rtc.now();
+
+  // Set alert time (e.g., 9:00 AM)
+  if (now.hour() == 9 && now.minute() == 0 && now.second() == 0) {
+    alertUser();
+    delay(1000); // Wait 1 second to avoid multiple triggers
+  }
+
+  delay(500);
 }
 
 void alertUser() {
+  // Buzzer alert
   digitalWrite(buzzerPin, HIGH);
-  delay(3000); // Buzz for 3 sec
+  delay(3000);
   digitalWrite(buzzerPin, LOW);
 
-  openMedicineBox();
+  // Open tray
+  openTray();
 
-  bool taken = checkIfMedicineTaken();
-  if (!taken) {
-    sendNotification();
+  bool picked = checkIfPicked();
+
+  if (!picked) {
+    Serial.println("Medicine not picked.");
+  } else {
+    Serial.println("Medicine picked.");
   }
 
-  closeMedicineBox();
+  // Close tray after wait
+  delay(2000);
+  closeTray();
 }
 
-void openMedicineBox() {
-  medicineServo.write(90); // Open
-  delay(1000);
+void openTray() {
+  digitalWrite(motorPin1, HIGH);
+  digitalWrite(motorPin2, LOW);
+  delay(2000); // Adjust motor duration to open fully
+  stopMotor();
 }
 
-void closeMedicineBox() {
-  medicineServo.write(0); // Close
-  delay(1000);
+void closeTray() {
+  digitalWrite(motorPin1, LOW);
+  digitalWrite(motorPin2, HIGH);
+  delay(2000); // Adjust motor duration to close fully
+  stopMotor();
 }
 
-bool checkIfMedicineTaken() {
-  Serial.println("Waiting for medicine pickup...");
-  int timeLimit = 10000; // 10 seconds to pick medicine
+void stopMotor() {
+  digitalWrite(motorPin1, LOW);
+  digitalWrite(motorPin2, LOW);
+}
+
+bool checkIfPicked() {
+  int timeout = 10000;
   int elapsed = 0;
-  while (elapsed < timeLimit) {
-    if (digitalRead(irSensorPin) == LOW) { // LOW = object detected
-      Serial.println("Medicine taken.");
+  while (elapsed < timeout) {
+    if (digitalRead(irSensorPin) == LOW) {
       return true;
     }
     delay(500);
     elapsed += 500;
   }
-  Serial.println("Medicine NOT taken.");
   return false;
-}
-
-void sendNotification() {
-  WiFiClientSecure client;
-  client.setInsecure(); // skip SSL certificate validation
-
-  Serial.println("Connecting to IFTTT...");
-  if (!client.connect(host, httpsPort)) {
-    Serial.println("Connection failed.");
-    return;
-  }
-
-  String url = String("/trigger/") + trigger + "/with/key/" + key;
-  Serial.print("Requesting URL: ");
-  Serial.println(url);
-
-  client.print(String("GET ") + url + " HTTP/1.1\r\n" +
-               "Host: " + host + "\r\n" +
-               "Connection: close\r\n\r\n");
-
-  Serial.println("Notification sent.");
 }
